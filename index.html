@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBELIVE</title>
+    <!-- Add Google Fonts - using both Orbitron and Audiowide for futuristic look -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+        html {
+    scroll-behavior: smooth;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background-image: url(assets/bg.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: (0, 0, 0, 0);
+            padding: 15px 20px;
+            color: rgb(255, 255, 255);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .logo span {
+            color: blue;
+        }
+
+        .navbar .logo .elive {
+            color: white;
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+            user-select: none;
+            z-index: 1001;
+        }
+
+        .dropdown {
+            display: none;
+            background-color: rgba(51, 51, 51, 0.9);
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(85, 85, 85, 0.8);
+        }
+
+        .dropdown.active {
+            display: block;
+            animation: dropdownFade 0.3s ease;
+        }
+
+        /* Welcome Text Container */
+        .welcome-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+            opacity: 0; /* Start invisible */
+            animation: fadeIn 2s ease-out forwards,
+                       float 4s ease-in-out infinite;
+        }
+
+        /* Main Welcome Text */
+        .welcome-text {
+            font-family: 'Audiowide', cursive;
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgb(18, 62, 255),
+                         0 0 20px rgb(0, 94, 255);
+            
+            line-height: 1.3;
+            
+        }
+
+        .tentang-container{
+            text-align: center;
+           
+            
+        }
+
+        .tentang-text{
+            text-align: center;
+            margin-top: 20px;
+
+        }
+
+        .image img {
+        height: 100%;
+        width: 100%;
+
+        }
+
+        .image2 img {
+        height: 100%;
+        width: 100%;
+        margin-top: -5px;
+        }
+
+        .image3 img {
+        height: 100%;
+        width: 100%;
+        margin-top: -5px;
+        }
+
+        /* Membuat container carousel */
+.carousel-container {
+    width: 100%; /* Atur lebar carousel */
+    overflow: hidden; /* Sembunyikan gambar yang keluar dari batas */
+    position: relative; /* Agar bisa memanipulasi posisi gambar */
+    
+    
+    
+    
+}
+
+.carousel-slide {
+    display: flex; /* Mengatur gambar dalam satu baris */
+    transition: transform 0.5s ease-in-out; /* Animasi pergeseran */
+    
+}
+
+.carousel-slide img {
+    width: 100%; /* Menyesuaikan lebar gambar dengan lebar container */
+    height: auto; /* Menjaga rasio gambar */
+}
+
+/* Menambahkan style untuk carousel secara horizontal */
+.carousel-container {
+    display: flex;
+    flex-direction: row; /* Atur carousel untuk bergerak horizontal */
+    
+}
+
+.carousel-slide {
+    display: flex;
+    flex-direction: row; /* Gambar berbaris secara horizontal */
+    
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        transform: translate(-50%, -52%);
+    }
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-text {
+        font-size: 2rem;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-text {
+        font-size: 1.5rem;
+    }
+}
+
+/* Menambahkan font Orbitron dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+
+.description {
+    font-family: 'Orbitron', sans-serif; /* Menggunakan font futuristik Orbitron */
+    font-size: 1rem; /* Menentukan ukuran font */
+    line-height: 1.6; /* Jarak antar baris */
+    text-align: center; /* Teks rata tengah */
+    max-width: 90%; /* Lebar maksimal konten */
+    margin: 5px auto; /* Menjaga jarak atas dan bawah, serta otomatis tengah */
+    color: white; /* Warna teks futuristik (biru terang) */
+    background: rgba(0, 0, 0, 0.6); /* Latar belakang semi-transparan */
+    padding: 20px; /* Memberikan padding pada teks */
+    border-radius: 10px; /* Sudut melengkung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan untuk efek 3D */
+    text-transform: uppercase; /* Membuat teks menjadi kapital semua */
+}
+
+@media (max-width: 768px) {
+    .description {
+        font-size: 1.2rem; /* Ukuran font sedikit lebih kecil pada layar lebih kecil */
+    }
+}
+
+@media (max-width: 480px) {
+    .description {
+        font-size: 1rem; /* Ukuran font lebih kecil untuk ponsel */
+        padding: 15px; /* Mengurangi padding */
+    }
+}
+
+/* Card Container */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    
+    
+}
+
+/* Individual Card */
+.card {
+    width: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Efek hover untuk card */
+}
+
+/* Image in Card */
+.card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    
+}
+
+/* Name under image */
+.card-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    padding: 10px;
+    color: #333;
+}
+
+/* Instagram Button */
+.card-btn {
+    display: inline-block;
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    margin: 15px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    
+}
+
+.card-btn:hover {
+    background-color: #327dff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-container {
+        gap: 15px;
+    }
+
+    .card {
+        width: 220px;
+    }
+
+    .card-name {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        gap: 10px;
+    }
+
+    .card {
+        width: 180px;
+    }
+
+    .card-name {
+        font-size: 0.9rem;
+    }
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #333; /* Warna latar belakang footer */
+    color: white; /* Warna teks di footer */
+    text-align: center; /* Menyelaraskan teks di tengah */
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 200px;
+}
+
+/* Footer Content (logo dan copyright) */
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo {
+    width: 40px; /* Atur ukuran logo */
+    height: auto;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Web by text */
+.footer-author {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-logo {
+        width: 30px; /* Ukuran logo lebih kecil di perangkat mobile */
+    }
+    
+    .footer-content p {
+        font-size: 0.9rem; /* Ukuran teks copyright lebih kecil di perangkat mobile */
+    }
+}
+
+.tentang-container {
+    padding: 50px;
+    text-align: center;
+    
+    color: #fff;
+}
+
+
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    justify-items: center;
+    
+    
+}
+
+.card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 26, 255, 0.5);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 20px;
+    
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px  rgb(0, 26, 255);
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+    
+}
+
+
+
+.card-btn {
+    display: inline-block;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: -5px;
+}
+
+.card-btn:hover {
+    background-color: #00ccff;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .card-name {
+        font-size: 1.4em;
+    }
+
+    .card-btn {
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card-name {
+        font-size: 1.2em;
+    }
+
+    .card-btn {
+        padding: 6px 12px;
+    }
+}
+
+.card-container2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.card2 {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 26, 255, 0.5);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 1px;
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+}
+
+.card-img2 {
+    width: 100%;
+    height: auto;
+    
+    
+    
+    
+}
+
+.card-name{
+    margin-top: 3px;
+    margin-bottom: 1px;
+}
+
+
+
+
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span>IB</span><span class="elive">ELIVE</span>
+        </div>
+        <div class="menu-icon" onclick="toggleDropdown()">☰</div>
+        <div class="dropdown" id="dropdownMenu">
+            <a href="#tentang">Tentang</a>
+            <a href="#Anggota">Anggota</a>
+            <a href="#Kegiatan">Kegiatan</a>
+            <a href="https://www.instagram.com/one.ib24/" target="_blank">Instagram</a>
+        </div>
+    </nav>
+
+    <div class="welcome-container">
+        <div class="welcome-text">Selamat Datang<br>di Website Kelas 1 IB</div>
+    </div>
+
+    <div class="image"><img src="assets/mip3 (2).jpeg" alt=""></div>
+
+    
+
+    <div id="tentang" class="tentang-container">
+        <div class="welcome-text">Siapa Kami?</div>
+    </div>
+
+    <div class="carousel-container">
+        <div class="carousel-slide">
+            <img src="assets/bbr.jpeg" alt="Image 1">
+            <img src="assets/spkt.jpeg" alt="Image 2">
+            <img src="assets/POTBARCOWO.jpeg" alt="Image 3">
+            <img src="assets/POTBARCEWE.jpeg" alt="Image 4">
+            <img src="assets/btkcwo.jpeg" alt="Image 5">
+            
+        </div>
+    </div>
+
+    
+    <div class="description">
+        Kami adalah Mahasiswa Manajemen Informatika (D3) Politeknik Negeri Sriwijaya kelas 1 IB angkatan 2024.
+    </div>
+
+    <div class="description">
+        kami memiliki semangat untuk menciptakan SDM unggul di bidang teknologi informasi, menjunjung tinggi solidaritas, bekerja sama dengan baik dalam tim, dan siap menghadapi tantangan dunia digital Sebagai calon profesional.
+    </div>
+
+    <div class="description">
+        kami berkomitmen untuk terus belajar dan beradaptasi dengan perkembangan teknologi yang pesat, agar dapat berkontribusi terbaik bagi masyarakat dan dunia industri.
+    </div>
+
+    <div id="Anggota" class="tentang-container">
+        <div class="welcome-text">Anggota Kelas</div>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <img src="assets/id card amel.png" alt="Anggota 1" class="card-img">
+           
+            <a href="https://www.instagram.com/ameliaa_ni/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/id card amrina.png" alt="Anggota 2" class="card-img">
+            
+            <a href="https://www.instagram.com/amrina.fp/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/aziz.jpg" alt="Anggota 3" class="card-img">
+            
+            <a href="https://www.instagram.com/aziz_akbar05/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/datin.png" alt="Anggota 1" class="card-img">
+           
+            <a href="https://www.instagram.com/datin._/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/tata.png" alt="Anggota 2" class="card-img">
+            
+            <a href="https://www.instagram.com/__aattaaa/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/dms.jpg" alt="Anggota 3" class="card-img">
+          
+            <a href="https://www.instagram.com/dimasranugrah_/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/glen.jpg" alt="Anggota 1" class="card-img">
+           
+            <a href="https://www.instagram.com/glentsthpn_/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/naya.png" alt="Anggota 2" class="card-img">
+            
+            <a href="https://instagram.com/nayyaaa.a_/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/fitra.jpg" alt="Anggota 3" class="card-img">
+            
+            <a href="https://www.instagram.com/kgsfitrarmdhn/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/khairun.jpg" alt="Anggota 1" class="card-img">
+           
+            <a href="https://www.instagram.com/chaanisaa._/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/lia.png" alt="Anggota 2" class="card-img">
+            
+            <a href="https://www.instagram.com/lianrhlmah/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/pajri.jpg" alt="Anggota 3" class="card-img">
+           
+            <a href="https://www.instagram.com/mhdpajri07/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/lanyard.jpeg" alt="Anggota 1" class="card-img">
+           
+            <a href="https://www.instagram.com/ra.pradja/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/haris.jpg" alt="Anggota 2" class="card-img">
+            
+            <a href="https://www.instagram.com/harisyn.ch/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/kdapi.jpg" alt="Anggota 3" class="card-img">
+            
+            <a href="https://www.instagram.com/kkhdpii.10/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/octa.png" alt="Anggota 1" class="card-img">
+           
+            <a href="https://www.instagram.com/viamaaa/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/jihan.png" alt="Anggota 2" class="card-img">
+           
+            <a href="https://www.instagram.com/rajihaan_/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/reisha.jpg" alt="Anggota 3" class="card-img">
+           
+            <a href="https://www.instagram.com/reishatr/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/susanti.png" alt="Anggota 1" class="card-img">
+           
+            <a href="https://www.instagram.com/210205_santi/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/vania.png" alt="Anggota 2" class="card-img">
+            
+            <a href="https://www.instagram.com/vanniiiiaaa/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/WahidRamadhan-IDCARD.png" alt="Anggota 3" class="card-img">
+            
+            <a href="https://www.instagram.com/_wahidde/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/zakiya.png" alt="Anggota 3" class="card-img">
+            
+            <a href="https://www.instagram.com/zakiya444/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+        <div class="card">
+            <img src="assets/zifa.jpg" alt="Anggota 3" class="card-img">
+            
+            <a href="https://www.instagram.com/zfmlya_chynt/" class="card-btn" target="_blank">Instagram</a>
+        </div>
+    </div>
+
+    <div id="Kegiatan" class="tentang-container">
+        <div class="welcome-text">Kegiatan</div>
+    </div>
+    
+    <div class="card-container2">
+        <div class="card2">
+            <img src="assets/panti1.jpeg" alt="Anggota 1" class="card-img2">
+            <h3 class="card-name">Sedekah Jum'at ke panti asuhan. </h3>         
+        </div>
+
+        <div class="card2">
+            <img src="assets/bskp.jpeg" alt="Anggota 1" class="card-img2">
+            <h3 class="card-name">Nonton bareng 1 kelas.</h3>
+        </div>
+
+        <div class="card2">
+            <img src="assets/kpa.jpeg" alt="Anggota 1" class="card-img2">
+            <h3 class="card-name">Belajar di gedung KPA MatKul B. Inggris.</h3>
+        </div>
+
+        <div class="card2">
+            <img src="assets/ultah vania.jpeg" alt="Anggota 1" class="card-img2">
+            <h3 class="card-name">Mensurprise ulang tahun teman sekelas, Vania.</h3>         
+        </div>
+
+       
+        
+    </div>
+    
+
+    <footer class="footer">
+        <div class="footer-content">
+            <img src="assets/logokelas.png" alt="CLASSIB Logo" class="footer-logo">
+            <p>&copy; 2025 CLASSIB. All Rights Reserved.</p>
+        </div>
+        <p class="footer-author">Web by: Pradja </p>
+    </footer>
+    
+
+
+    <script>    
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const menuIcon = document.querySelector('.menu-icon');
+            
+            if (!menuIcon.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }   
+        });
+
+        let currentIndex = 0;
+const slides = document.querySelector('.carousel-slide');
+const totalSlides = slides.children.length;
+
+function autoSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides; // Loop kembali ke awal setelah slide terakhir
+    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+setInterval(autoSlide, 2000); // Berpindah slide otomatis setiap 2 detik
+    </script>
+</body>
+</html>
